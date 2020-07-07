@@ -99,7 +99,7 @@ runtime publicPath 主要解决的是微应用动态载入的 脚本、样式、
 ```js
 {
   output: {
-    publicPath: `//localhost:${port}`;
+    publicPath: `//localhost:${port}`,
   }
 }
 ```
@@ -228,6 +228,10 @@ qiankun 2.0 版本将提供一种更智能的方式使其自动化。
 但是 IE 环境下（不支持 Proxy 的浏览器）只能使用单实例模式，即 `singular` 配置会被自动置为 `true`。
 
 你可以在[这里](/zh/api#startopts)找到 singular 相关说明。
+
+## 报错 `Here is no "fetch" on the window env, you need to polyfill it`
+
+qiankun 依赖的 import-html-entry 通过 `window.fetch` 来获取微应用的资源，部分[不支持 fetch 的浏览器](https://caniuse.com/#search=fetch)需要在入口处打上相应的 [polyfill](https://github.com/github/fetch)
 
 ## 非 webpack 构建的微应用支持接入 qiankun 么？
 
