@@ -162,7 +162,7 @@ By linking the micro-application to some url rules, the function of automaticall
 
     - getTemplate - `(tpl: string) => string` - optional
     
-    - excludeAssetFilter - `(asset: string) => boolean` - optional，some special dynamic loaded micro app resources should not be handled by qiankun hijacking
+    - excludeAssetFilter - `(assetUrl: string) => boolean` - optional，some special dynamic loaded micro app resources should not be handled by qiankun hijacking
 
 - Usage
 
@@ -244,6 +244,8 @@ A criterion for judging whether the business is closely related: <strong>Look at
     * getPublicPath - `(url: string) => string` - Optional
 
     * getTemplate - `(tpl: string) => string` - Optional
+    
+    * excludeAssetFilter - `(assetUrl: string) => boolean` - optional，some special dynamic loaded micro app resources should not be handled by qiankun hijacking
 
 * 返回值 - `MicroApp` - Micro application examples
   * mount(): Promise&lt;null&gt;;
@@ -274,12 +276,12 @@ A criterion for judging whether the business is closely related: <strong>Look at
   If you need to support the main application to manually update the micro application, you need to export an update hook for the micro application entry:
 
   ```ts
-  export function mount(props) {
+  export async function mount(props) {
     renderApp(props);
   }
 
   // Added update hook to allow the main application to manually update the micro application
-  export function update(props) {
+  export async function update(props) {
     renderPatch(props);
   }
   ```
